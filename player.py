@@ -12,6 +12,9 @@ class Player(CircleShape):
         self.is_invulnerable = False
     
     def draw(self, screen):
+        if self.is_invulnerable:
+            if int(self.invulnerability_timer * 5) % 2 == 0:
+                return
         pygame.draw.polygon(screen, "white", self.triangle(), 2)
     
     def triangle(self):
