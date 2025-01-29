@@ -3,6 +3,7 @@ import random
 from circleshape import CircleShape
 # from asteroidfield import AsteroidField
 from constants import *
+from shrapnel import Shrapnel
 
 class Asteroid(CircleShape):
     def __init__(self, x, y, radius):
@@ -13,6 +14,15 @@ class Asteroid(CircleShape):
 
     def update(self, dt):
         self.position += self.velocity * dt
+        
+        if self.position.x < (-ASTEROID_MAX_RADIUS):
+            self.position.x = SCREEN_WIDTH + (ASTEROID_MAX_RADIUS)
+        elif self.position.x > SCREEN_WIDTH + (ASTEROID_MAX_RADIUS):
+            self.position.x = 0 - (ASTEROID_MAX_RADIUS)
+        elif self.position.y < (-ASTEROID_MAX_RADIUS):
+            self.position.y = SCREEN_HEIGHT + (ASTEROID_MAX_RADIUS)
+        elif self.position.y > SCREEN_HEIGHT + (ASTEROID_MAX_RADIUS):
+            self.position.y = 0 - (ASTEROID_MAX_RADIUS)
 
     def split(self):
         self.kill()
@@ -28,3 +38,9 @@ class Asteroid(CircleShape):
         asteroid.velocity = vector_1 * 1.2
         asteroid = Asteroid(self.position.x, self.position.y, new_radius)
         asteroid.velocity = vector_2 * 1.2
+
+        # create explosion shrapnel
+        explosion_shrapnel = random.randint(3, 5)
+        for shrapnel in range(explosion_shrapnel):
+            shrapnel = Shrapnel(self.position.x, self.position.y, 3)
+            shrapnel.velocity = self.velocity.rotate(random.uniform(0, 360))
