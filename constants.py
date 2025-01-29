@@ -10,3 +10,6 @@ PLAYER_RADIUS = 20
 PLAYER_TURN_SPEED = 300  # degrees per second
 PLAYER_SPEED = 200  # pixels per second
 ASTEROID_SPEED = 100  # pixels per second
+SHOT_RADIUS = 5
+PLAYER_SHOOT_SPEED = 500 # pixels per second
+PLAYER_SHOOT_COOLDOWN = 0.3 # seconds
